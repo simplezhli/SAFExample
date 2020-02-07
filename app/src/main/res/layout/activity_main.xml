@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
+        <TextView
+            android:id="@+id/info"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:onClick="selectSingleImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择图片" />
+
+        <Button
+            android:onClick="getDirPermission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择目录，获取操作权限" />
+
+        <Button
+            android:onClick="createFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建文件" />
+
+        <Button
+            android:onClick="openFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看文件内容" />
+
+        <Button
+            android:onClick="updateFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改文件" />
+
+        <Button
+            android:onClick="deleteFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除文件" />
+
+    </LinearLayout>
+
+</ScrollView>
