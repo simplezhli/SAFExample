@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="300dp"
-            android:layout_height="300dp" />
+            android:layout_width="280dp"
+            android:layout_height="280dp" />
 
         <TextView
             android:id="@+id/info"
@@ -34,6 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="选择目录，获取操作权限" />
+
+        <Button
+            android:onClick="releasePermission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="撤销选择的目录权限" />
 
         <Button
             android:onClick="createFile"

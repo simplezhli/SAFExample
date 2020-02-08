@@ -29,7 +29,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int REQUEST_CODE_FOR_SINGLE_FILE = 10001;
+    public static int READ_REQUEST_CODE = 10001;
     public static int WRITE_REQUEST_CODE = 10002;
     public static int REQUEST_CODE_FOR_DIR = 10003;
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         //过滤只显示图像类型文件
         intent.setType("image/*");
-        startActivityForResult(intent, REQUEST_CODE_FOR_SINGLE_FILE);
+        startActivityForResult(intent, READ_REQUEST_CODE);
     }
 
     public void createFile(View view) {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultData != null) {
                 //获取Uri
                 Uri uri = resultData.getData();
-                if (requestCode == REQUEST_CODE_FOR_SINGLE_FILE) {
+                if (requestCode == READ_REQUEST_CODE) {
                     getImageMetaData(uri);
                     showImage(uri);
                 } else if (requestCode == WRITE_REQUEST_CODE) {
@@ -188,7 +188,31 @@ public class MainActivity extends AppCompatActivity {
                 getDirInfo(uri);
 
             } catch (SecurityException e) {
+                mInfo.setText("");
                 startSafForDirPermission();
+            }
+        }
+    }
+
+    public void releasePermission(View view) {
+
+        SharedPreferences sp = getSharedPreferences("DirPermission", Context.MODE_PRIVATE);
+        String uriTree = sp.getString("uriTree", "");
+
+        if (!TextUtils.isEmpty(uriTree)) {
+            try {
+                Uri uri = Uri.parse(uriTree);
+                final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+
+                getContentResolver().releasePersistableUriPermission(uri, takeFlags);
+                // 或者
+                this.revokeUriPermission(uri, takeFlags);
+                // 重启才会生效，所以可以清除uriTree
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("uriTree", "");
+                editor.apply();
+            } catch (SecurityException e) {
+                e.fillInStackTrace();
             }
         }
     }
