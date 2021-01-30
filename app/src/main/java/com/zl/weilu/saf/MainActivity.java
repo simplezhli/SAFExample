@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-
+        super.onActivityResult(requestCode, resultCode, resultData);
         if (resultCode == Activity.RESULT_OK) {
             if (resultData != null) {
                 //获取Uri
