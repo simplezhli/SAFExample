@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectSingleImage(View view) {
         //通过系统的文件浏览器选择一个文件
+        // Android 11限制：使用 ACTION_OPEN_DOCUMENT_TREE 或 ACTION_OPEN_DOCUMENT，无法浏览到Android/data/ 和 Android/obb/ 目录
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         //筛选，只显示可以“打开”的结果，如文件(而不是联系人或时区列表)
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -226,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startSafForDirPermission() {
         // 用户可以选择任意文件夹，将它及其子文件夹的读写权限授予APP。
+        // Android 11限制：无法授权访问存储根目录、Download文件夹。
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         startActivityForResult(intent, REQUEST_CODE_FOR_DIR);
     }
